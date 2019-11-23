@@ -1,0 +1,17 @@
+{
+  "name": "slack-bot-playground",
+  "version": "0.1.0",
+  "description": "A playground for a Slack playground",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mick@mickf.net",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/bolt": "^1.4.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
