@@ -30,10 +30,46 @@ app.message("hello", ({ message, say }) => {
   });
 });
 
+// Listens to incoming messages that contain "list"
+app.message("list", async ({ message, say, context }) => {
+  try {
+    // Sample of how to use `app.client` to use the web API.
+    const result = await app.client.users.list({ token: context.botToken });
+    console.log(result);
+
+    say({
+      blocks: [
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: "Pick a user from the dropdown list"
+          },
+          accessory: {
+            action_id: "text1234",
+            type: "users_select",
+            placeholder: {
+              type: "plain_text",
+              text: "Select an item"
+            }
+          }
+        }
+      ]
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 app.action("button_click", ({ body, ack, say }) => {
   // Acknowledge the action
   ack();
   say(`<@${body.user.id}> clicked the button`);
+});
+
+app.action("text1234", ({ ack, say, payload }) => {
+  ack();
+  say(`<@${payload.selected_user}> was picked`);
 });
 
 (async () => {
